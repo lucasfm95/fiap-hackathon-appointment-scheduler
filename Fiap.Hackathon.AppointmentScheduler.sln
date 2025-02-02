@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fiap.Hackathon.AppointmentScheduler.Api", "src\Fiap.Hackathon.AppointmentScheduler.Api\Fiap.Hackathon.AppointmentScheduler.Api.csproj", "{18DA7BC8-3849-4A48-B0B3-05AC550879E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{42DA3090-CFFA-4846-A513-979C6A5DBA4C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{9AD66A76-8F32-4C41-B82A-565C0C6E895D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fiap.Hackathon.AppointmentScheduler.Application", "src\Fiap.Hackathon.AppointmentScheduler.Application\Fiap.Hackathon.AppointmentScheduler.Application.csproj", "{B0056718-1792-45D3-A164-2E130AE59BF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fiap.Hackathon.AppointmentScheduler.Domain", "src\Fiap.Hackathon.AppointmentScheduler.Domain\Fiap.Hackathon.AppointmentScheduler.Domain.csproj", "{E8C38A8E-21D0-4F40-A3AF-7FC4D0BC9F0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fiap.Hackathon.AppointmentScheduler.Infrastructure", "src\Fiap.Hackathon.AppointmentScheduler.Infrastructure\Fiap.Hackathon.AppointmentScheduler.Infrastructure.csproj", "{A87A44A7-23E3-4F93-903E-812AFC4DACFC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fiap.Hackathon.AppointmentScheduler.UnitTests", "tests\Fiap.Hackathon.AppointmentScheduler.UnitTests\Fiap.Hackathon.AppointmentScheduler.UnitTests.csproj", "{E55A910D-E44B-48CC-A16E-EE0AB0ACF9C3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{18DA7BC8-3849-4A48-B0B3-05AC550879E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18DA7BC8-3849-4A48-B0B3-05AC550879E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18DA7BC8-3849-4A48-B0B3-05AC550879E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18DA7BC8-3849-4A48-B0B3-05AC550879E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0056718-1792-45D3-A164-2E130AE59BF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0056718-1792-45D3-A164-2E130AE59BF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0056718-1792-45D3-A164-2E130AE59BF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0056718-1792-45D3-A164-2E130AE59BF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8C38A8E-21D0-4F40-A3AF-7FC4D0BC9F0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8C38A8E-21D0-4F40-A3AF-7FC4D0BC9F0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8C38A8E-21D0-4F40-A3AF-7FC4D0BC9F0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8C38A8E-21D0-4F40-A3AF-7FC4D0BC9F0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A87A44A7-23E3-4F93-903E-812AFC4DACFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A87A44A7-23E3-4F93-903E-812AFC4DACFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A87A44A7-23E3-4F93-903E-812AFC4DACFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A87A44A7-23E3-4F93-903E-812AFC4DACFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E55A910D-E44B-48CC-A16E-EE0AB0ACF9C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E55A910D-E44B-48CC-A16E-EE0AB0ACF9C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E55A910D-E44B-48CC-A16E-EE0AB0ACF9C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E55A910D-E44B-48CC-A16E-EE0AB0ACF9C3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{18DA7BC8-3849-4A48-B0B3-05AC550879E8} = {42DA3090-CFFA-4846-A513-979C6A5DBA4C}
+		{B0056718-1792-45D3-A164-2E130AE59BF4} = {42DA3090-CFFA-4846-A513-979C6A5DBA4C}
+		{E8C38A8E-21D0-4F40-A3AF-7FC4D0BC9F0B} = {42DA3090-CFFA-4846-A513-979C6A5DBA4C}
+		{A87A44A7-23E3-4F93-903E-812AFC4DACFC} = {42DA3090-CFFA-4846-A513-979C6A5DBA4C}
+		{E55A910D-E44B-48CC-A16E-EE0AB0ACF9C3} = {9AD66A76-8F32-4C41-B82A-565C0C6E895D}
+	EndGlobalSection
+EndGlobal
