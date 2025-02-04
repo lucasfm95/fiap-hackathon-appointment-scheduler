@@ -17,4 +17,10 @@
       </Content>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Fiap.Hackathon.AppointmentScheduler.Application\Fiap.Hackathon.AppointmentScheduler.Application.csproj" />
+      <ProjectReference Include="..\Fiap.Hackathon.AppointmentScheduler.Domain\Fiap.Hackathon.AppointmentScheduler.Domain.csproj" />
+      <ProjectReference Include="..\Fiap.Hackathon.AppointmentScheduler.Infrastructure\Fiap.Hackathon.AppointmentScheduler.Infrastructure.csproj" />
+    </ItemGroup>
+
 </Project>
