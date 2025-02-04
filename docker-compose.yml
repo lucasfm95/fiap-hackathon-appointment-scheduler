@@ -1,0 +1,43 @@
+name: "fiap-hackathon"
+services:
+  appointment-scheduler-api:
+    container_name: appointment-scheduler-api
+    image: appointment-scheduler-api:1
+    environment:
+      - CONNECTION_STRING_DB_POSTGRES=Host=postgres;Port=5432;Username=postgres;Password=postgres;Database=appointment_scheduler
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      args:
+        version: 1
+    restart: unless-stopped
+    ports:
+      - 8888:80
+    networks:
+      - fiap-hackathon_network
+    depends_on:
+      - postgres
+
+  postgres:
+    container_name: postgres-db
+    image: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=appointment_scheduler
+    volumes:
+      - postgres-db-volume:/var/lib/postgresql/data
+      - ./postgres/:/docker-entrypoint-initdb.d/
+    restart: unless-stopped
+    ports:
+      - 5432:5432
+    networks:
+      - fiap-hackathon_network
+
+volumes:
+  postgres-db-volume:
+    external: false
+  
+networks:
+  fiap-hackathon_network:
+    driver: bridge
