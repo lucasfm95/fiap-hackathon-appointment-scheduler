@@ -13,10 +13,9 @@ public class DoctorService(IDoctorRepository doctorRepository)
         {
             Name = doctorDto.Name,
             Crm = doctorDto.Crm,
-            Perfil = Perfil.Doctor,
+            Profile = Profile.Doctor,
             Password = PasswordHasherHelper.Hash(doctorDto.Password),
             Specialty = doctorDto.Specialty,
-            ContactInfo = doctorDto.ContactInfo
         };
         
         return doctorRepository.CreateAsync(doctor);
@@ -25,8 +24,8 @@ public class DoctorService(IDoctorRepository doctorRepository)
     public async Task<IEnumerable<GetAllDoctorsDto>> GetAll()
     {
         var doctors = await doctorRepository.GetAllAsync();
-        return doctors.Select(d => new GetAllDoctorsDto(d.Id, d.Crm, d.Specialty, d.ContactInfo));
+        return doctors.Select(d => new GetAllDoctorsDto(d.Id, d.Crm, d.Specialty));
     }
     
-    public record GetAllDoctorsDto(long Id, string Crm, string Specialty, string ContactInfo);
+    public record GetAllDoctorsDto(long Id, string Crm, string Specialty);
 }

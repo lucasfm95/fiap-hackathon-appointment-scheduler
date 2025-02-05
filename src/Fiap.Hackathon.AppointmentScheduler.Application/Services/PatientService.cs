@@ -21,9 +21,7 @@ public class PatientService
             Name = patientDto.Name,
             Email = patientDto.Email,
             Password = PasswordHasherHelper.Hash(patientDto.Password),
-            Perfil = Perfil.Patient,
-            BirthDate = patientDto.BirthDate,
-            ContactInfo = patientDto.ContactInfo
+            Profile = Profile.Patient
         };
         
         return _patientRepository.CreateAsync(patient);
@@ -32,8 +30,8 @@ public class PatientService
     public async Task<IEnumerable<GetAllPatientsDto>> GetAll()
     {
         var patients = await _patientRepository.GetAllAsync();
-        return patients.Select(p => new GetAllPatientsDto(p.Id, p.Name, p.Email, p.BirthDate, p.ContactInfo));
+        return patients.Select(p => new GetAllPatientsDto(p.Id, p.Name, p.Email));
     }
     
-    public record GetAllPatientsDto(long Id, string Name, string Email, DateTime BirthDate, string ContactInfo);
+    public record GetAllPatientsDto(long Id, string Name, string Email);
 }
