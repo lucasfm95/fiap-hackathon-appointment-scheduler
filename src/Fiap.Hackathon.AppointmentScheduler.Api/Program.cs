@@ -12,8 +12,8 @@ builder.Services.AddSwaggerGen(options =>
     options.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",
-        Title = "Movie API",
-        Description = "API for managing a list of movies and their active status.",
+        Title = "Appointment Scheduler API",
+        Description = "API for appointments, doctors and patients.",
         TermsOfService = new Uri("https://example.com/terms")
     });
 });
