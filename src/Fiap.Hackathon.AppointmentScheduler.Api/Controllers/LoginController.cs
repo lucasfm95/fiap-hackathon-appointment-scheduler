@@ -1,6 +1,6 @@
 using Fiap.Hackathon.AppointmentScheduler.Application;
-using Fiap.Hackathon.AppointmentScheduler.Application.Dtos;
 using Fiap.Hackathon.AppointmentScheduler.Application.Repositories;
+using Fiap.Hackathon.AppointmentScheduler.Domain.Requests;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Fiap.Hackathon.AppointmentScheduler.Api.Controllers;
@@ -10,7 +10,7 @@ namespace Fiap.Hackathon.AppointmentScheduler.Api.Controllers;
 public class LoginController(AuthTokenService authTokenService, IPatientRepository patientRepository, IDoctorRepository doctorRepository) : ControllerBase
 {
     [HttpPost("Patient")]
-    public async Task<IActionResult> LoginPatient([FromBody] LoginPatientDto loginPatient)
+    public async Task<IActionResult> LoginPatient([FromBody] LoginPatientRequest loginPatient)
     {
         var patient = await patientRepository.GetPatientByEmail(loginPatient.Email);
         
@@ -30,7 +30,7 @@ public class LoginController(AuthTokenService authTokenService, IPatientReposito
     }
     
     [HttpPost("Doctor")]
-    public async Task<IActionResult> LoginDoctor([FromBody] LoginDoctorDto loginDoctor)
+    public async Task<IActionResult> LoginDoctor([FromBody] LoginDoctorRequest loginDoctor)
     {
         var doctor = await doctorRepository.GetDoctorByCrmAsync(loginDoctor.Crm);
         if (!PasswordHasherHelper.Verify(loginDoctor.Password, doctor.Password))

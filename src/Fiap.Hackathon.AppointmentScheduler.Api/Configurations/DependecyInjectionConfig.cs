@@ -8,8 +8,8 @@ internal static class DependencyInjectionConfig
 {
     internal static void RegisterRepositories(this IServiceCollection serviceProvider)
     {
-        serviceProvider.AddSingleton<IDoctorRepository,DoctorRepository>();
-        serviceProvider.AddSingleton<IPatientRepository, PatientRepository>();
+        serviceProvider.AddScoped<IDoctorRepository,DoctorRepository>();
+        serviceProvider.AddScoped<IPatientRepository, PatientRepository>();
     }
     
     internal static void RegisterApplicationServices(this IServiceCollection serviceProvider)

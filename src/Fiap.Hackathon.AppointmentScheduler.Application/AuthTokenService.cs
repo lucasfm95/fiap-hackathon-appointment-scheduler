@@ -1,9 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Fiap.Hackathon.AppointmentScheduler.Application.Dtos;
 using Fiap.Hackathon.AppointmentScheduler.Application.Options;
-using Fiap.Hackathon.AppointmentScheduler.Domain;
 using Fiap.Hackathon.AppointmentScheduler.Domain.Entities;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;

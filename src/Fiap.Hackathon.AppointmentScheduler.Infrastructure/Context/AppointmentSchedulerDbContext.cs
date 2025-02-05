@@ -7,6 +7,7 @@ namespace Fiap.Hackathon.AppointmentScheduler.Infrastructure.Context;
 public class AppointmentSchedulerDbContext(DbContextOptions<AppointmentSchedulerDbContext> options) : DbContext(options)
 {
     public DbSet<Doctor> Doctors { get; set; }
+    public DbSet<Patient> Patients { get; set; }
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

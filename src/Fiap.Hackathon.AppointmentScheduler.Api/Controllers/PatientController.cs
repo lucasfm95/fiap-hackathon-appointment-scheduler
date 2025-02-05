@@ -1,7 +1,6 @@
 using Fiap.Hackathon.AppointmentScheduler.Application.Constants;
-using Fiap.Hackathon.AppointmentScheduler.Application.Dtos;
 using Fiap.Hackathon.AppointmentScheduler.Application.Services;
-using Fiap.Hackathon.AppointmentScheduler.Domain;
+using Fiap.Hackathon.AppointmentScheduler.Domain.Requests;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,9 +13,9 @@ public class PatientController(PatientService patientService) : ControllerBase
 {
     [HttpPost()]
     [AllowAnonymous]
-    public async Task<IActionResult> Create([FromBody] PatientDto patientDto)
+    public async Task<IActionResult> Create([FromBody] CreatePatientRequest createPatientRequest)
     {
-        await patientService.CreateAsync(patientDto);
+        await patientService.CreateAsync(createPatientRequest);
         return Ok();
     }
     

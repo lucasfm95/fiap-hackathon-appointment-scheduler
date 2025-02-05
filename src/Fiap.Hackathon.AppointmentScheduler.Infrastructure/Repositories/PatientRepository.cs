@@ -1,20 +1,20 @@
 using Fiap.Hackathon.AppointmentScheduler.Application.Repositories;
 using Fiap.Hackathon.AppointmentScheduler.Domain;
 using Fiap.Hackathon.AppointmentScheduler.Domain.Entities;
+using Fiap.Hackathon.AppointmentScheduler.Infrastructure.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace Fiap.Hackathon.AppointmentScheduler.Infrastructure.Repositories;
 
-public class PatientRepository : IPatientRepository
+public class PatientRepository(AppointmentSchedulerDbContext dbContext) : IPatientRepository
 {
-    private readonly List<Patient> _patients = new();
-    public Task CreateAsync(Patient patient)
+    public async Task CreateAsync(Patient patient)
     {
-        patient.Id = _patients.Count + 1;
-        _patients.Add(patient);
-        return Task.CompletedTask;
+        await dbContext.Patients.AddAsync(patient);
+        await dbContext.SaveChangesAsync();
     }
 
-    public Task<Patient> GetPatientByEmail(string email) => Task.FromResult(_patients.First(p => p.Email == email));
+    public Task<Patient> GetPatientByEmail(string email) => dbContext.Patients.FirstAsync(p => p.Email == email);
     
-    public Task<IEnumerable<Patient>> GetAllAsync() => Task.FromResult(_patients.AsEnumerable());
+    public Task<IEnumerable<Patient>> GetAllAsync() => Task.FromResult(dbContext.Patients.AsEnumerable());
 }

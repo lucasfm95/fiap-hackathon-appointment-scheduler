@@ -1,31 +1,30 @@
-using Fiap.Hackathon.AppointmentScheduler.Application.Dtos;
 using Fiap.Hackathon.AppointmentScheduler.Application.Repositories;
-using Fiap.Hackathon.AppointmentScheduler.Domain;
 using Fiap.Hackathon.AppointmentScheduler.Domain.Entities;
+using Fiap.Hackathon.AppointmentScheduler.Domain.Enums;
+using Fiap.Hackathon.AppointmentScheduler.Domain.Requests;
+using Fiap.Hackathon.AppointmentScheduler.Domain.Responses;
 
 namespace Fiap.Hackathon.AppointmentScheduler.Application.Services;
 
 public class DoctorService(IDoctorRepository doctorRepository)
 {
-    public Task CreateAsync(DoctorDto doctorDto)
+    public Task CreateAsync(CreateDoctorRequest createDoctorRequest)
     {
         var doctor = new Doctor()
         {
-            Name = doctorDto.Name,
-            Crm = doctorDto.Crm,
+            Name = createDoctorRequest.Name,
+            Crm = createDoctorRequest.Crm,
             Profile = Profile.Doctor,
-            Password = PasswordHasherHelper.Hash(doctorDto.Password),
-            Specialty = doctorDto.Specialty,
+            Password = PasswordHasherHelper.Hash(createDoctorRequest.Password),
+            Specialty = createDoctorRequest.Specialty
         };
         
         return doctorRepository.CreateAsync(doctor);
     }
 
-    public async Task<IEnumerable<GetAllDoctorsDto>> GetAll()
+    public async Task<IEnumerable<GetAllDoctorsResponse>> GetAll()
     {
         var doctors = await doctorRepository.GetAllAsync();
-        return doctors.Select(d => new GetAllDoctorsDto(d.Id, d.Crm, d.Specialty));
+        return doctors.Select(d => new GetAllDoctorsResponse(d.Id, d.Name, d.Crm, d.Specialty));
     }
-    
-    public record GetAllDoctorsDto(long Id, string Crm, string Specialty);
 }

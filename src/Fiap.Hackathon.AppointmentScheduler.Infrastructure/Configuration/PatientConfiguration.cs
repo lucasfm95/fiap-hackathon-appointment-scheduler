@@ -4,27 +4,28 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Fiap.Hackathon.AppointmentScheduler.Infrastructure.Configuration;
 
-public class DoctorConfiguration : IEntityTypeConfiguration<Doctor>
+public class PatientConfiguration : IEntityTypeConfiguration<Patient>
 {
-    public void Configure(EntityTypeBuilder<Doctor> builder)
+    public void Configure(EntityTypeBuilder<Patient> builder)
     {
         builder.HasKey(doctor => doctor.Id);
         builder.Property(k => k.Name)
             .IsRequired()
             .HasMaxLength(200);
-        builder.Property(p => p.Crm)
+        builder.Property(k => k.Email)
             .IsRequired()
-            .HasMaxLength(10);
-        builder.Property(p => p.Specialty)
+            .IsUnicode()
+            .HasMaxLength(200);
+        builder.Property(p => p.Cpf)
             .IsRequired()
-            .HasMaxLength(100);
-        builder.Property(p => p.Password)
-            .IsRequired()
-            .IsUnicode();
+            .HasMaxLength(11);
         builder.Property(p => p.Profile)
             .IsRequired()
             .HasColumnType("smallint");
-        builder.HasIndex(p => p.Crm)
+        builder.Property(p => p.Password)
+            .IsRequired()
+            .IsUnicode();
+        builder.HasIndex(e => e.Cpf)
             .IsUnique();
     }
 }

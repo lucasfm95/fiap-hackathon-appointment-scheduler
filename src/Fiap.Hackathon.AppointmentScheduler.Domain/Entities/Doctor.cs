@@ -1,3 +1,5 @@
+using Fiap.Hackathon.AppointmentScheduler.Domain.Enums;
+
 namespace Fiap.Hackathon.AppointmentScheduler.Domain.Entities;
 
 public class Doctor
