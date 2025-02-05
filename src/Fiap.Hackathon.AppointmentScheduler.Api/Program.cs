@@ -2,9 +2,16 @@ using Fiap.Hackathon.AppointmentScheduler.Api;
 using Fiap.Hackathon.AppointmentScheduler.Application.Options;
 using Fiap.Hackathon.AppointmentScheduler.Application.Repositories;
 using Fiap.Hackathon.AppointmentScheduler.Application.Services;
+using Fiap.Hackathon.AppointmentScheduler.Infrastructure.Context;
 using Fiap.Hackathon.AppointmentScheduler.Infrastructure.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<AppointmentSchedulerDbContext>(options =>
+{
+    options.UseNpgsql(Environment.GetEnvironmentVariable("CONNECTION_STRING_DB_POSTGRES"));
+});
 
 builder.Services.Configure<JwtTokenOptions>(
     builder.Configuration.GetSection("JwtTokenOptions"));

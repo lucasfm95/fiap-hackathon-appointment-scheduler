@@ -4,9 +4,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Fiap.Hackathon.AppointmentScheduler.Infrastructure.Context;
 
-public class AppointmentSchedulerDbContext(DbContextOptions<AppointmentSchedulerDbContext> options) : DbContext(options)
+public class AppointmentSchedulerDbContext() : DbContext()
 {
     public DbSet<Doctor> Doctors { get; set; }
+    
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Username=postgres;Password=postgres;Database=appointment_scheduler");
+    }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
