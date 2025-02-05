@@ -3,8 +3,20 @@ using Fiap.Hackathon.AppointmentScheduler.Application.Options;
 using Fiap.Hackathon.AppointmentScheduler.Application.Repositories;
 using Fiap.Hackathon.AppointmentScheduler.Application.Services;
 using Fiap.Hackathon.AppointmentScheduler.Infrastructure.Repositories;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "Movie API",
+        Description = "API for managing a list of movies and their active status.",
+        TermsOfService = new Uri("https://example.com/terms")
+    });
+});
 
 builder.Services.Configure<JwtTokenOptions>(
     builder.Configuration.GetSection("JwtTokenOptions"));
@@ -27,7 +39,11 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
+
+
 
 app.UseHttpsRedirection();
 
