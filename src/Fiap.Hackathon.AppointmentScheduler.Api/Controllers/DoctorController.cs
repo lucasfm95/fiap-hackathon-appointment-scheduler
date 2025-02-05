@@ -23,4 +23,10 @@ public class DoctorController(DoctorService doctorService) : ControllerBase
     {
         return Ok(await doctorService.GetAll());
     }
+
+    [HttpGet("filtered")]
+    public async Task<IActionResult> GetFiltered(string specialty, string name, string crm)
+    {
+        return Ok(await doctorService.GetFiltered(specialty, name, crm));
+    }
 }

@@ -16,4 +16,14 @@ public class DoctorRepository(AppointmentSchedulerDbContext dbContext) : IDoctor
     public Task<Doctor> GetDoctorByCrmAsync(string crm) => dbContext.Doctors.FirstAsync(d => d.Crm == crm);
     
     public Task<IEnumerable<Doctor>> GetAllAsync() => Task.FromResult(dbContext.Doctors.AsEnumerable());
+
+    public Task<IEnumerable<Doctor>> GetFiltered(string specialty, string name, string crm)
+    {
+        return Task.FromResult(dbContext.Doctors.Where(d => d.Specialty == string.Empty ||
+                                                            d.Specialty.Contains(specialty) ||
+                                                            d.Name == string.Empty ||
+                                                            d.Name.Contains(name) ||
+                                                            d.Crm == string.Empty ||
+                                                            d.Crm.Contains(crm)).AsEnumerable());
+    }
 }
