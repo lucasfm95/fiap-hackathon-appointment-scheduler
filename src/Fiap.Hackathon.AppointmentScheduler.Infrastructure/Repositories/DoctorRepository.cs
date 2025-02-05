@@ -1,5 +1,4 @@
 using Fiap.Hackathon.AppointmentScheduler.Application.Repositories;
-using Fiap.Hackathon.AppointmentScheduler.Domain;
 using Fiap.Hackathon.AppointmentScheduler.Domain.Entities;
 
 namespace Fiap.Hackathon.AppointmentScheduler.Infrastructure.Repositories;
