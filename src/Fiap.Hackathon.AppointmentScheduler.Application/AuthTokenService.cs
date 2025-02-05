@@ -1,9 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Fiap.Hackathon.AppointmentScheduler.Application.Dtos;
 using Fiap.Hackathon.AppointmentScheduler.Application.Options;
-using Fiap.Hackathon.AppointmentScheduler.Domain;
 using Fiap.Hackathon.AppointmentScheduler.Domain.Entities;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -24,7 +22,7 @@ public class AuthTokenService
         var claims = new List<Claim>
         {
             new(ClaimTypes.Name, patient.Email),
-            new(ClaimTypes.Role, patient.Perfil.ToString())
+            new(ClaimTypes.Role, patient.Profile.ToString())
         };
         
         return GenerateToken(claims);
@@ -35,7 +33,7 @@ public class AuthTokenService
         var claims = new List<Claim>
         {
             new(ClaimTypes.Name, doctor.Crm),
-            new(ClaimTypes.Role, doctor.Perfil.ToString())
+            new(ClaimTypes.Role, doctor.Profile.ToString())
         };
         
         return GenerateToken(claims);
