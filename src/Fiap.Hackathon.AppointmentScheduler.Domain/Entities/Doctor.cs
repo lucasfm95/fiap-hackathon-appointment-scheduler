@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using Fiap.Hackathon.AppointmentScheduler.Domain.Enums;
 
 namespace Fiap.Hackathon.AppointmentScheduler.Domain.Entities;

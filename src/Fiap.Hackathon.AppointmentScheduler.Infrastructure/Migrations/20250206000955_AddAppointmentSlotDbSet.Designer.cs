@@ -3,6 +3,7 @@ using System;
 using Fiap.Hackathon.AppointmentScheduler.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Fiap.Hackathon.AppointmentScheduler.Infrastructure.Migrations
 {
     [DbContext(typeof(AppointmentSchedulerDbContext))]
-    partial class AppointmentSchedulerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250206000955_AddAppointmentSlotDbSet")]
+    partial class AddAppointmentSlotDbSet
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,44 +24,6 @@ namespace Fiap.Hackathon.AppointmentScheduler.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("Fiap.Hackathon.AppointmentScheduler.Domain.Entities.Appointment", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
-                    b.Property<long>("AppointmentSlotId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("DoctorId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Justification")
-                        .HasMaxLength(500)
-                        .HasColumnType("character varying(500)");
-
-                    b.Property<long>("PatientId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Status")
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
-                        .HasDefaultValue("AGENDADO");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AppointmentSlotId");
-
-                    b.HasIndex("DoctorId");
-
-                    b.HasIndex("PatientId");
-
-                    b.ToTable("Appointments");
-                });
 
             modelBuilder.Entity("Fiap.Hackathon.AppointmentScheduler.Domain.Entities.AppointmentSlot", b =>
                 {
@@ -91,9 +56,6 @@ namespace Fiap.Hackathon.AppointmentScheduler.Infrastructure.Migrations
                         .HasColumnType("bigint");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
-                    b.Property<decimal>("AppointmentValue")
-                        .HasColumnType("decimal(10,2)");
 
                     b.Property<string>("Crm")
                         .IsRequired()
@@ -164,33 +126,6 @@ namespace Fiap.Hackathon.AppointmentScheduler.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("Patients");
-                });
-
-            modelBuilder.Entity("Fiap.Hackathon.AppointmentScheduler.Domain.Entities.Appointment", b =>
-                {
-                    b.HasOne("Fiap.Hackathon.AppointmentScheduler.Domain.Entities.AppointmentSlot", "AppointmentSlot")
-                        .WithMany()
-                        .HasForeignKey("AppointmentSlotId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Fiap.Hackathon.AppointmentScheduler.Domain.Entities.Doctor", "Doctor")
-                        .WithMany()
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Fiap.Hackathon.AppointmentScheduler.Domain.Entities.Patient", "Patient")
-                        .WithMany()
-                        .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppointmentSlot");
-
-                    b.Navigation("Doctor");
-
-                    b.Navigation("Patient");
                 });
 
             modelBuilder.Entity("Fiap.Hackathon.AppointmentScheduler.Domain.Entities.AppointmentSlot", b =>

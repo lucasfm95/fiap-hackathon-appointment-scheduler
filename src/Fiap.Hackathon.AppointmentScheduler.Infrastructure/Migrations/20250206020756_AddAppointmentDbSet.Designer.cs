@@ -3,6 +3,7 @@ using System;
 using Fiap.Hackathon.AppointmentScheduler.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Fiap.Hackathon.AppointmentScheduler.Infrastructure.Migrations
 {
     [DbContext(typeof(AppointmentSchedulerDbContext))]
-    partial class AppointmentSchedulerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250206020756_AddAppointmentDbSet")]
+    partial class AddAppointmentDbSet
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -91,9 +94,6 @@ namespace Fiap.Hackathon.AppointmentScheduler.Infrastructure.Migrations
                         .HasColumnType("bigint");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
-                    b.Property<decimal>("AppointmentValue")
-                        .HasColumnType("decimal(10,2)");
 
                     b.Property<string>("Crm")
                         .IsRequired()
