@@ -8,4 +8,5 @@ public interface IPatientRepository
     Task CreateAsync(Patient patient);
     Task<Patient> GetPatientByEmail(string email);
     Task<IEnumerable<Patient>> GetAllAsync();
+    Task<Patient> GetPatientByCpf(string cpf);
 }
