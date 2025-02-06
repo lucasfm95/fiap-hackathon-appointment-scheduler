@@ -1,3 +1,4 @@
+using Fiap.Hackathon.AppointmentScheduler.Application.Constants;
 using Fiap.Hackathon.AppointmentScheduler.Application.Services;
 using Fiap.Hackathon.AppointmentScheduler.Domain.Entities;
 using Fiap.Hackathon.AppointmentScheduler.Domain.Requests;
@@ -11,7 +12,7 @@ namespace Fiap.Hackathon.AppointmentScheduler.Api.Controllers;
 public class AppointmentController(AppointmentService appointmentService) : ControllerBase
 {
     [HttpPost]
-    [AllowAnonymous]
+    [Authorize(Roles = Roles.Patient)]
     public async Task<ActionResult<Appointment>> CreateAppointment(CreateAppointmentRequest request)
     {
         await appointmentService.CreateAsync(request);
