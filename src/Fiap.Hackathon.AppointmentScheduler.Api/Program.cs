@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
 using Fiap.Hackathon.AppointmentScheduler.Api;
 using Fiap.Hackathon.AppointmentScheduler.Api.Configurations;
+using Fiap.Hackathon.AppointmentScheduler.Api.Middlewares;
 using Fiap.Hackathon.AppointmentScheduler.Application.Options;
 using Microsoft.OpenApi.Models;
 using Fiap.Hackathon.AppointmentScheduler.Infrastructure.Context;
@@ -69,4 +70,5 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 app.UseHealthcheck();
+app.UseMiddleware<ExceptionMiddleware>();
 app.Run();
