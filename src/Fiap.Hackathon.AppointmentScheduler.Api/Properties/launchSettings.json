@@ -9,7 +9,7 @@
       "applicationUrl": "http://localhost:5167",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "CONNECTION_STRING_DB_POSTGRES": "Host=postgres;Port=5432;Username=postgres;Password=postgres;Database=appointment_scheduler"
+        "CONNECTION_STRING_DB_POSTGRES": "Host=localhost;Port=5432;Username=postgres;Password=postgres;Database=appointment_scheduler"
       }
     },
     "https": {
