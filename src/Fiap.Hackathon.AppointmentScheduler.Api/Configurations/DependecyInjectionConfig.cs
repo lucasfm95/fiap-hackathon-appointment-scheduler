@@ -10,11 +10,13 @@ internal static class DependencyInjectionConfig
     {
         serviceProvider.AddScoped<IDoctorRepository,DoctorRepository>();
         serviceProvider.AddScoped<IPatientRepository, PatientRepository>();
+        serviceProvider.AddScoped<IAppointmentSlotRepository, AppointmentSlotRepository>();
     }
     
     internal static void RegisterApplicationServices(this IServiceCollection serviceProvider)
     {
         serviceProvider.AddScoped<DoctorService>();
         serviceProvider.AddScoped<PatientService>();
+        serviceProvider.AddScoped<AppointmentSlotService>();
     }
 }

@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using Fiap.Hackathon.AppointmentScheduler.Domain.Enums;
 
 namespace Fiap.Hackathon.AppointmentScheduler.Domain.Entities;
@@ -8,6 +9,8 @@ public class Doctor
     public string Name { get; init; }
     public string Crm { get; init; }
     public string Specialty { get; init; }
+    
+    [JsonIgnore]
     public string Password { get; init; }
     public Profile Profile { get; init; }
 }

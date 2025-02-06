@@ -2,23 +2,40 @@ using System.Text.Json.Serialization;
 using Fiap.Hackathon.AppointmentScheduler.Api;
 using Fiap.Hackathon.AppointmentScheduler.Api.Configurations;
 using Fiap.Hackathon.AppointmentScheduler.Application.Options;
-using Fiap.Hackathon.AppointmentScheduler.Application.Repositories;
-using Fiap.Hackathon.AppointmentScheduler.Application.Services;
-using Fiap.Hackathon.AppointmentScheduler.Infrastructure.Repositories;
 using Microsoft.OpenApi.Models;
 using Fiap.Hackathon.AppointmentScheduler.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddSwaggerGen(options =>
+builder.Services.AddSwaggerGen(c =>
 {
-    options.SwaggerDoc("v1", new OpenApiInfo
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+
+    
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
-        Version = "v1",
-        Title = "Appointment Scheduler API",
-        Description = "API for appointments, doctors and patients.",
-        TermsOfService = new Uri("https://example.com/terms")
+        In = ParameterLocation.Header,
+        Description = "Please enter a valid token",
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        BearerFormat = "JWT",
+        Scheme = "Bearer"
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            Array.Empty<string>()
+        }
     });
 });
 
