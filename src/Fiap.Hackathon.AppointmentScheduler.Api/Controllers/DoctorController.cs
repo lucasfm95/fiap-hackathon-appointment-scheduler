@@ -25,7 +25,7 @@ public class DoctorController(DoctorService doctorService) : ControllerBase
     }
 
     [HttpGet("filtered")]
-    public async Task<IActionResult> GetFiltered(string specialty, string name, string crm)
+    public async Task<IActionResult> GetFiltered(string? specialty, string? name, string? crm)
     {
         return Ok(await doctorService.GetFiltered(specialty, name, crm));
     }

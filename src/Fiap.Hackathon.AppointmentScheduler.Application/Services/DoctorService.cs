@@ -28,9 +28,9 @@ public class DoctorService(IDoctorRepository doctorRepository)
         return doctors.Select(d => new GetAllDoctorsResponse(d.Id, d.Name, d.Crm, d.Specialty, d.AppointmentValue));
     }
 
-    public async Task<IEnumerable<GetAllDoctorsResponse>> GetFiltered(string specialty, string name, string crm)
+    public async Task<IEnumerable<GetAllDoctorsResponse>> GetFiltered(string? specialty, string? name, string? crm)
     {
         var doctors = await doctorRepository.GetFiltered(specialty, name, crm);
-        return doctors.Select(d => new GetAllDoctorsResponse(d.Id, d.Name, d.Crm, d.Specialty));
+        return doctors.Select(d => new GetAllDoctorsResponse(d.Id, d.Name, d.Crm, d.Specialty, d.AppointmentValue));
     }
 }
