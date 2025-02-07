@@ -18,6 +18,9 @@ public class AppointmentConfiguration: IEntityTypeConfiguration<Appointment>
         
         builder.Property(a => a.AppointmentSlotId)
             .IsRequired();
+
+        builder.HasIndex(ind => ind.AppointmentSlotId)
+            .IsUnique();
         
         builder
             .HasOne(a => a.Doctor)

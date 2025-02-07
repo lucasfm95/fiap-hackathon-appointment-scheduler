@@ -57,7 +57,7 @@ namespace Fiap.Hackathon.AppointmentScheduler.Infrastructure.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("Appointments");
+                    b.ToTable("Appointments", (string)null);
                 });
 
             modelBuilder.Entity("Fiap.Hackathon.AppointmentScheduler.Domain.Entities.AppointmentSlot", b =>
@@ -81,7 +81,7 @@ namespace Fiap.Hackathon.AppointmentScheduler.Infrastructure.Migrations
 
                     b.HasIndex("DoctorId");
 
-                    b.ToTable("AppointmentSlots");
+                    b.ToTable("AppointmentSlots", (string)null);
                 });
 
             modelBuilder.Entity("Fiap.Hackathon.AppointmentScheduler.Domain.Entities.Doctor", b =>
@@ -120,7 +120,7 @@ namespace Fiap.Hackathon.AppointmentScheduler.Infrastructure.Migrations
                     b.HasIndex("Crm")
                         .IsUnique();
 
-                    b.ToTable("Doctors");
+                    b.ToTable("Doctors", (string)null);
                 });
 
             modelBuilder.Entity("Fiap.Hackathon.AppointmentScheduler.Domain.Entities.Patient", b =>
@@ -160,7 +160,7 @@ namespace Fiap.Hackathon.AppointmentScheduler.Infrastructure.Migrations
                     b.HasIndex("Cpf")
                         .IsUnique();
 
-                    b.ToTable("Patients");
+                    b.ToTable("Patients", (string)null);
                 });
 
             modelBuilder.Entity("Fiap.Hackathon.AppointmentScheduler.Domain.Entities.Appointment", b =>

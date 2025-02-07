@@ -17,4 +17,14 @@ public class AppointmentService(IAppointmentRepository appointmentRepository)
         
         return appointmentRepository.CreateAsync(appointment);
     }
+    
+    public Task UpdateStatusAsync(long appointmentId, string status, string? justification)
+    {
+        return appointmentRepository.UpdateStatusAsync(appointmentId, status, justification);
+    }
+    
+    public Task<List<Appointment>> GetAllScheduledAppointmentsByDoctor(long doctorId)
+    {
+        return appointmentRepository.GetAllScheduledAppointmentsByDoctor(doctorId);
+    }
 }

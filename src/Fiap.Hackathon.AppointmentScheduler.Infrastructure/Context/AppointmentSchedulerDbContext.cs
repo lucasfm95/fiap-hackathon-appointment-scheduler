@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Fiap.Hackathon.AppointmentScheduler.Infrastructure.Context;
 
-public class AppointmentSchedulerDbContext(DbContextOptions<AppointmentSchedulerDbContext> options) : DbContext(options)
+public class AppointmentSchedulerDbContext() : DbContext()
 {
     public DbSet<Doctor> Doctors { get; set; }
     public DbSet<Patient> Patients { get; set; }

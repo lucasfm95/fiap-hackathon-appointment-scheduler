@@ -33,7 +33,8 @@ public class AuthTokenService
         var claims = new List<Claim>
         {
             new(ClaimTypes.Name, doctor.Crm),
-            new(ClaimTypes.Role, doctor.Profile.ToString())
+            new(ClaimTypes.Role, doctor.Profile.ToString()),
+            new("DoctorId", doctor.Id.ToString())
         };
         
         return GenerateToken(claims);

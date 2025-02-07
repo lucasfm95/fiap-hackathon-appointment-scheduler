@@ -13,9 +13,27 @@ public class AppointmentController(AppointmentService appointmentService) : Cont
 {
     [HttpPost]
     [Authorize(Roles = Roles.Patient)]
-    public async Task<ActionResult<Appointment>> CreateAppointment(CreateAppointmentRequest request)
+    public async Task<IActionResult> CreateAppointment(CreateAppointmentRequest request)
     {
         await appointmentService.CreateAsync(request);
         return Created();
     }
+    
+    [HttpGet("scheduled-appointments")]
+    [Authorize(Roles = Roles.Doctor)]
+    public async Task<ActionResult<Appointment>> GetAllScheduledAppointmentsByDoctor()
+    {
+        var doctorId = User.Claims.FirstOrDefault(c => c.Type == "DoctorId");
+        return Ok(await appointmentService.GetAllScheduledAppointmentsByDoctor(long.Parse(doctorId.Value)));
+    }
+    
+    [HttpPost("set-status")]
+    [Authorize(Roles = Roles.Doctor)]
+    public async Task<IActionResult> SetStatusAppointment(UpdateAppointmentRequest request)
+    {
+        await appointmentService.UpdateStatusAsync(request.AppointmentId, request.Status,request.Justification);
+        return Ok();
+    }
+    
+    
 }
