@@ -17,4 +17,6 @@ public class PatientRepository(AppointmentSchedulerDbContext dbContext) : IPatie
     public Task<Patient> GetPatientByEmail(string email) => dbContext.Patients.FirstAsync(p => p.Email == email);
     
     public Task<IEnumerable<Patient>> GetAllAsync() => Task.FromResult(dbContext.Patients.AsEnumerable());
+    
+    public Task<Patient> GetPatientByCpf(string cpf) => dbContext.Patients.FirstAsync(p => p.Cpf == cpf);
 }

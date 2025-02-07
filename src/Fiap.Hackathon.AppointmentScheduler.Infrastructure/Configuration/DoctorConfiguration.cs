@@ -26,5 +26,8 @@ public class DoctorConfiguration : IEntityTypeConfiguration<Doctor>
             .HasColumnType("smallint");
         builder.HasIndex(p => p.Crm)
             .IsUnique();
+        builder.Property(p => p.AppointmentValue)
+            .IsRequired()
+            .HasColumnType("decimal(10,2)");
     }
 }

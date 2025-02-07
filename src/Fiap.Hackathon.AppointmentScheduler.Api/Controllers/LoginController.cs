@@ -1,5 +1,6 @@
 using Fiap.Hackathon.AppointmentScheduler.Application;
 using Fiap.Hackathon.AppointmentScheduler.Application.Repositories;
+using Fiap.Hackathon.AppointmentScheduler.Domain.Entities;
 using Fiap.Hackathon.AppointmentScheduler.Domain.Requests;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,8 +13,8 @@ public class LoginController(AuthTokenService authTokenService, IPatientReposito
     [HttpPost("Patient")]
     public async Task<IActionResult> LoginPatient([FromBody] LoginPatientRequest loginPatient)
     {
-        var patient = await patientRepository.GetPatientByEmail(loginPatient.Email);
-        
+        var patient = await GetPatient(loginPatient);
+
         if (!PasswordHasherHelper.Verify(loginPatient.Password, patient.Password))
         {
             return Unauthorized();
@@ -28,7 +29,17 @@ public class LoginController(AuthTokenService authTokenService, IPatientReposito
 
         return Unauthorized();
     }
-    
+
+    private  Task<Patient> GetPatient(LoginPatientRequest loginPatient)
+    {
+        if (loginPatient.Login.All(char.IsDigit) && loginPatient.Login.Length == 11)
+        {
+            return patientRepository.GetPatientByCpf(loginPatient.Login);
+        }
+        
+        return patientRepository.GetPatientByEmail(loginPatient.Login);
+    }
+
     [HttpPost("Doctor")]
     public async Task<IActionResult> LoginDoctor([FromBody] LoginDoctorRequest loginDoctor)
     {

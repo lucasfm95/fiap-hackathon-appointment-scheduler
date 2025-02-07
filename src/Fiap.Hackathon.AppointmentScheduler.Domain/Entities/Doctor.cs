@@ -9,6 +9,7 @@ public class Doctor
     public string Name { get; init; }
     public string Crm { get; init; }
     public string Specialty { get; init; }
+    public decimal AppointmentValue { get; init; }
     public string Password { get; init; }
     public Profile Profile { get; init; }
 }

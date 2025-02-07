@@ -92,6 +92,9 @@ namespace Fiap.Hackathon.AppointmentScheduler.Infrastructure.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
+                    b.Property<decimal>("AppointmentValue")
+                        .HasColumnType("decimal(10,2)");
+
                     b.Property<string>("Crm")
                         .IsRequired()
                         .HasMaxLength(10)
