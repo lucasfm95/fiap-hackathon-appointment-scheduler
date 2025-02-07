@@ -17,8 +17,15 @@ public class AppointmentConfiguration: IEntityTypeConfiguration<Appointment>
             .IsRequired();
         
         builder.Property(a => a.AppointmentSlotId)
-            
             .IsRequired();
+
+        builder.Property(a => a.Status)
+            .IsRequired()
+            .HasMaxLength(50);
+        
+        builder.Property(a => a.Justification)
+            .IsRequired(false)
+            .HasMaxLength(500);
         
         builder
             .HasOne(a => a.Doctor)
@@ -34,13 +41,5 @@ public class AppointmentConfiguration: IEntityTypeConfiguration<Appointment>
             .HasOne(a => a.AppointmentSlot)
             .WithMany()
             .HasForeignKey(a => a.AppointmentSlotId);
-        
-        builder.Property(a => a.Status)
-            .HasMaxLength(50)
-            .HasDefaultValue("AGENDADO");
-        
-        builder.Property(a => a.Justification)
-            .IsRequired(false)
-            .HasMaxLength(500);
     }
 }

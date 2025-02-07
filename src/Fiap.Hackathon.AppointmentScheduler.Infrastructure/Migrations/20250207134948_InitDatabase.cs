@@ -77,7 +77,7 @@ namespace Fiap.Hackathon.AppointmentScheduler.Infrastructure.Migrations
                     DoctorId = table.Column<long>(type: "bigint", nullable: false),
                     PatientId = table.Column<long>(type: "bigint", nullable: false),
                     AppointmentSlotId = table.Column<long>(type: "bigint", nullable: false),
-                    Status = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true, defaultValue: "AGENDADO"),
+                    Status = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     Justification = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true)
                 },
                 constraints: table =>

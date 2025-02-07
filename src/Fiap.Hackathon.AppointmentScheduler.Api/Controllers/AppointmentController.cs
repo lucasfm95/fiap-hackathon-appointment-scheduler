@@ -1,6 +1,7 @@
 using Fiap.Hackathon.AppointmentScheduler.Application.Constants;
 using Fiap.Hackathon.AppointmentScheduler.Application.Services;
 using Fiap.Hackathon.AppointmentScheduler.Domain.Entities;
+using Fiap.Hackathon.AppointmentScheduler.Domain.Enums;
 using Fiap.Hackathon.AppointmentScheduler.Domain.Exceptions;
 using Fiap.Hackathon.AppointmentScheduler.Domain.Requests;
 using Microsoft.AspNetCore.Authorization;
@@ -50,7 +51,7 @@ public class AppointmentController(AppointmentService appointmentService) : Cont
     [Authorize(Roles = $"{Roles.Doctor}, {Roles.Patient}")]
     public async Task<IActionResult> SetStatusAppointment(UpdateAppointmentRequest request)
     {
-        if (request.Status.Equals("cancelado", StringComparison.InvariantCultureIgnoreCase) && string.IsNullOrWhiteSpace(request.Justification))
+        if (request.Status == AppointmentStatus.Canceled && string.IsNullOrWhiteSpace(request.Justification))
             return BadRequest("Justification is required to cancel the appointment");
         
         await appointmentService.UpdateStatusAsync(request.AppointmentId, request.Status,request.Justification);

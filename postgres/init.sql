@@ -40,7 +40,7 @@ CREATE TABLE "Appointments" (
     "DoctorId" bigint NOT NULL,
     "PatientId" bigint NOT NULL,
     "AppointmentSlotId" bigint NOT NULL,
-    "Status" character varying(50) DEFAULT 'AGENDADO',
+    "Status" character varying(50) NOT NULL,
     "Justification" character varying(500),
     CONSTRAINT "PK_Appointments" PRIMARY KEY ("Id"),
     CONSTRAINT "FK_Appointments_AppointmentSlots_AppointmentSlotId" FOREIGN KEY ("AppointmentSlotId") REFERENCES "AppointmentSlots" ("Id") ON DELETE CASCADE,
@@ -61,7 +61,7 @@ CREATE UNIQUE INDEX "IX_Doctors_Crm" ON "Doctors" ("Crm");
 CREATE UNIQUE INDEX "IX_Patients_Cpf" ON "Patients" ("Cpf");
 
 INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
-VALUES ('20250207125902_InitDatabase', '9.0.1');
+VALUES ('20250207134948_InitDatabase', '9.0.1');
 
 COMMIT;
 

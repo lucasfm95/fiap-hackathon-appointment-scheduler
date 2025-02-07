@@ -44,10 +44,9 @@ namespace Fiap.Hackathon.AppointmentScheduler.Infrastructure.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("Status")
-                        .ValueGeneratedOnAdd()
+                        .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
-                        .HasDefaultValue("AGENDADO");
+                        .HasColumnType("character varying(50)");
 
                     b.HasKey("Id");
 

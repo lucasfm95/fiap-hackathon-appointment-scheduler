@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Fiap.Hackathon.AppointmentScheduler.Infrastructure.Migrations
 {
     [DbContext(typeof(AppointmentSchedulerDbContext))]
-    [Migration("20250207125902_InitDatabase")]
+    [Migration("20250207134948_InitDatabase")]
     partial class InitDatabase
     {
         /// <inheritdoc />
@@ -47,10 +47,9 @@ namespace Fiap.Hackathon.AppointmentScheduler.Infrastructure.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("Status")
-                        .ValueGeneratedOnAdd()
+                        .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
-                        .HasDefaultValue("AGENDADO");
+                        .HasColumnType("character varying(50)");
 
                     b.HasKey("Id");
 

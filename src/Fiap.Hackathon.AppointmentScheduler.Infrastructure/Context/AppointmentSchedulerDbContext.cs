@@ -16,11 +16,6 @@ public class AppointmentSchedulerDbContext(DbContextOptions<AppointmentScheduler
     public DbSet<AppointmentSlot> AppointmentSlots { get; set; }
     public DbSet<Appointment> Appointments { get; set; }
     
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Username=postgres;Password=postgres;Database=appointment_scheduler");
-    }
-    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(DoctorConfiguration).Assembly);

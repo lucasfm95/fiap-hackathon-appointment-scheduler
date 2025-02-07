@@ -1,5 +1,6 @@
 using Fiap.Hackathon.AppointmentScheduler.Application.Repositories;
 using Fiap.Hackathon.AppointmentScheduler.Domain.Entities;
+using Fiap.Hackathon.AppointmentScheduler.Domain.Enums;
 using Fiap.Hackathon.AppointmentScheduler.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,7 +17,7 @@ public class AppointmentRepository(AppointmentSchedulerDbContext dbContext) : IA
     public async Task<List<Appointment>> GetAllScheduledAppointmentsByDoctor(long doctorId)
     {
         return await dbContext
-            .Appointments.Where(a => a.DoctorId == doctorId && a.Status!.Equals("AGENDADO"))
+            .Appointments.Where(a => a.DoctorId == doctorId && a.Status == AppointmentStatus.Scheduled.ToString())
             .ToListAsync();
     }
     
@@ -27,19 +28,19 @@ public class AppointmentRepository(AppointmentSchedulerDbContext dbContext) : IA
             .ToListAsync();
     }
 
-    public async Task<int> UpdateStatusAsync(long appointmentId, string status, string? justification)
+    public async Task<int> UpdateStatusAsync(long appointmentId, AppointmentStatus status, string? justification)
     {
         return await dbContext.Appointments
             .Where(a => a.Id == appointmentId)
             .ExecuteUpdateAsync(prop => prop
-                    .SetProperty(p => p.Status, status)
+                    .SetProperty(p => p.Status, status.ToString())
                     .SetProperty(p => p.Justification, justification));
     }
     
     public async Task<IEnumerable<Appointment>> GetByAppointmentSlot(long appointmentSlotId)
     {
         var slotAppointments =
-            await dbContext.Appointments.Where(appointment => appointment.AppointmentSlotId == appointmentSlotId && appointment.Status!.ToUpper() != "CANCELADO").ToListAsync();
+            await dbContext.Appointments.Where(appointment => appointment.AppointmentSlotId == appointmentSlotId && appointment.Status != AppointmentStatus.Canceled.ToString()).ToListAsync();
 
         return slotAppointments;
     }

@@ -1,5 +1,6 @@
 using Fiap.Hackathon.AppointmentScheduler.Application.Repositories;
 using Fiap.Hackathon.AppointmentScheduler.Domain.Entities;
+using Fiap.Hackathon.AppointmentScheduler.Domain.Enums;
 using Fiap.Hackathon.AppointmentScheduler.Domain.Exceptions;
 using Fiap.Hackathon.AppointmentScheduler.Domain.Requests;
 
@@ -13,7 +14,8 @@ public class AppointmentService(IAppointmentRepository appointmentRepository)
         {
             DoctorId = request.DoctorId,
             PatientId = request.PatientId,
-            AppointmentSlotId = request.AppointmentSlotId
+            AppointmentSlotId = request.AppointmentSlotId,
+            Status = AppointmentStatus.Scheduled.ToString()
         };
         
         var appointments = await appointmentRepository.GetByAppointmentSlot(request.AppointmentSlotId);
@@ -25,7 +27,7 @@ public class AppointmentService(IAppointmentRepository appointmentRepository)
         await appointmentRepository.CreateAsync(appointment);
     }
     
-    public Task UpdateStatusAsync(long appointmentId, string status, string? justification)
+    public Task UpdateStatusAsync(long appointmentId, AppointmentStatus status, string? justification)
     {
         return appointmentRepository.UpdateStatusAsync(appointmentId, status, justification);
     }

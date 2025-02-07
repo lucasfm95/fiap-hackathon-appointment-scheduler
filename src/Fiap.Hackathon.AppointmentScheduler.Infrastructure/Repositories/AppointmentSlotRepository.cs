@@ -1,5 +1,6 @@
 using Fiap.Hackathon.AppointmentScheduler.Application.Repositories;
 using Fiap.Hackathon.AppointmentScheduler.Domain.Entities;
+using Fiap.Hackathon.AppointmentScheduler.Domain.Enums;
 using Fiap.Hackathon.AppointmentScheduler.Infrastructure.Context;
 using LinqKit;
 using Microsoft.EntityFrameworkCore;
@@ -18,7 +19,6 @@ public class AppointmentSlotRepository(AppointmentSchedulerDbContext dbContext) 
     {
         return Task.FromResult(dbContext.AppointmentSlots.Include(a => a.Doctor).AsEnumerable());
     }
-    
     
     public async Task DeleteAsync(long id)
     {
@@ -41,11 +41,11 @@ public class AppointmentSlotRepository(AppointmentSchedulerDbContext dbContext) 
         var slotAppointments =
             await dbContext.AppointmentSlots.Where(predicate).ToListAsync();
 
-        var querytAppointments = dbContext.Appointments.Where(a =>
-            a.DoctorId == doctorId && a.Status != "CANCELADO" &&
+        var queryAppointments = dbContext.Appointments.Where(a =>
+            a.DoctorId == doctorId && a.Status != AppointmentStatus.Canceled.ToString() &&
             slotAppointments.Select(sp => sp.Id).Contains(a.AppointmentSlotId));
         
-        var appointments = await querytAppointments.ToListAsync();
+        var appointments = await queryAppointments.ToListAsync();
 
         var appointmentSlots = new List<AppointmentSlot>();
         

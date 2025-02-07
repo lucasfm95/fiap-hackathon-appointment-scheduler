@@ -1,3 +1,5 @@
+using Fiap.Hackathon.AppointmentScheduler.Domain.Enums;
+
 namespace Fiap.Hackathon.AppointmentScheduler.Domain.Entities;
 
 public class Appointment
@@ -9,6 +11,6 @@ public class Appointment
     public Patient Patient { get; init; }
     public long AppointmentSlotId { get; set; }
     public AppointmentSlot AppointmentSlot { get; set; }
-    public string? Status { get; init; }
+    public string Status { get; init; }
     public string? Justification { get; init; }
 }
