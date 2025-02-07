@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Fiap.Hackathon.AppointmentScheduler.Infrastructure.Migrations
 {
     [DbContext(typeof(AppointmentSchedulerDbContext))]
-    [Migration("20250206020756_AddAppointmentDbSet")]
-    partial class AddAppointmentDbSet
+    [Migration("20250207125902_InitDatabase")]
+    partial class InitDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -72,7 +72,7 @@ namespace Fiap.Hackathon.AppointmentScheduler.Infrastructure.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime>("AvailableDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<TimeSpan>("AvailableTime")
                         .HasColumnType("interval");
@@ -94,6 +94,9 @@ namespace Fiap.Hackathon.AppointmentScheduler.Infrastructure.Migrations
                         .HasColumnType("bigint");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<decimal>("AppointmentValue")
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<string>("Crm")
                         .IsRequired()

@@ -17,10 +17,8 @@ public class AppointmentConfiguration: IEntityTypeConfiguration<Appointment>
             .IsRequired();
         
         builder.Property(a => a.AppointmentSlotId)
+            
             .IsRequired();
-
-        builder.HasIndex(ind => ind.AppointmentSlotId)
-            .IsUnique();
         
         builder
             .HasOne(a => a.Doctor)
@@ -44,6 +42,5 @@ public class AppointmentConfiguration: IEntityTypeConfiguration<Appointment>
         builder.Property(a => a.Justification)
             .IsRequired(false)
             .HasMaxLength(500);
-
     }
 }

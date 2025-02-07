@@ -51,8 +51,7 @@ namespace Fiap.Hackathon.AppointmentScheduler.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppointmentSlotId")
-                        .IsUnique();
+                    b.HasIndex("AppointmentSlotId");
 
                     b.HasIndex("DoctorId");
 
@@ -70,7 +69,7 @@ namespace Fiap.Hackathon.AppointmentScheduler.Infrastructure.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime>("AvailableDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<TimeSpan>("AvailableTime")
                         .HasColumnType("interval");
