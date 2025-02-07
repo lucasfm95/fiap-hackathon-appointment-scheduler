@@ -23,7 +23,7 @@ public class AppointmentSlotService(IAppointmentSlotRepository appointmentSlotRe
     public async Task<IEnumerable<GetAllAppointmentSlotsResponse>> GetAll()
     {
         var appointmentSlots = await appointmentSlotRepository.GetAllAsync();
-        return appointmentSlots.Select(a => new GetAllAppointmentSlotsResponse(a.Doctor, a.AvailableDate, a.AvailableTime));
+        return appointmentSlots.Select(a => new GetAllAppointmentSlotsResponse(a.Id, a.Doctor, a.AvailableDate, a.AvailableTime));
     }
     
     public async Task DeleteAsync(long id)

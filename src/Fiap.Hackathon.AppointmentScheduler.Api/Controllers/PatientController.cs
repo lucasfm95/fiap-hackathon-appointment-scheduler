@@ -11,12 +11,12 @@ namespace Fiap.Hackathon.AppointmentScheduler.Api.Controllers;
 [Authorize]
 public class PatientController(PatientService patientService) : ControllerBase
 {
-    [HttpPost()]
+    [HttpPost]
     [AllowAnonymous]
     public async Task<IActionResult> Create([FromBody] CreatePatientRequest createPatientRequest)
     {
         await patientService.CreateAsync(createPatientRequest);
-        return Ok();
+        return Created();
     }
     
     [HttpGet()]
