@@ -8,7 +8,7 @@ namespace Fiap.Hackathon.AppointmentScheduler.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-
+[Authorize]
 public class AppointmentSlotController(AppointmentSlotService appointmentSlotService): ControllerBase
 {
     [HttpPost()]
