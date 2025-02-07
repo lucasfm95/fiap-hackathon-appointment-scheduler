@@ -27,4 +27,9 @@ public class AppointmentService(IAppointmentRepository appointmentRepository)
     {
         return appointmentRepository.GetAllScheduledAppointmentsByDoctor(doctorId);
     }
+    
+    public Task<List<Appointment>> GetAllScheduledAppointmentsByPatient(long patientId)
+    {
+        return appointmentRepository.GetAllScheduledAppointmentsByPatient(patientId);
+    }
 }

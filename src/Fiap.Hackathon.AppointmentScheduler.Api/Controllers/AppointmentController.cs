@@ -11,15 +11,6 @@ namespace Fiap.Hackathon.AppointmentScheduler.Api.Controllers;
 [Route("[controller]")]
 public class AppointmentController(AppointmentService appointmentService) : ControllerBase
 {
-    [HttpPost]
-    [Authorize(Roles = Roles.Patient)]
-    public async Task<IActionResult> CreateAppointment(CreateAppointmentRequest request)
-    {
-        await appointmentService.CreateAsync(request);
-        
-        return Created();
-    }
-    
     [HttpGet("scheduled-appointments")]
     [Authorize(Roles = Roles.Doctor)]
     public async Task<ActionResult<Appointment>> GetAllScheduledAppointmentsByDoctor()
@@ -27,6 +18,24 @@ public class AppointmentController(AppointmentService appointmentService) : Cont
         var doctorId = User.Claims.FirstOrDefault(c => c.Type == "DoctorId");
         
         return Ok(await appointmentService.GetAllScheduledAppointmentsByDoctor(long.Parse(doctorId.Value)));
+    }
+    
+    [HttpGet("scheduled-appointments/Patient")]
+    [Authorize(Roles = Roles.Patient)]
+    public async Task<ActionResult<Appointment>> GetAllScheduledAppointmentsByPatient()
+    {
+        var patientId = User.Claims.FirstOrDefault(c => c.Type == "PatientId");
+        
+        return Ok(await appointmentService.GetAllScheduledAppointmentsByPatient(long.Parse(patientId.Value)));
+    }
+    
+    [HttpPost]
+    [Authorize(Roles = Roles.Patient)]
+    public async Task<IActionResult> CreateAppointment(CreateAppointmentRequest request)
+    {
+        await appointmentService.CreateAsync(request);
+        
+        return Created();
     }
     
     [HttpPatch("set-status")]

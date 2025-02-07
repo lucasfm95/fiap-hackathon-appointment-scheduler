@@ -19,6 +19,13 @@ public class AppointmentRepository(AppointmentSchedulerDbContext dbContext) : IA
             .Appointments.Where(a => a.DoctorId == doctorId && a.Status!.Equals("AGENDADO"))
             .ToListAsync();
     }
+    
+    public async Task<List<Appointment>> GetAllScheduledAppointmentsByPatient(long patientId)
+    {
+        return await dbContext
+            .Appointments.Where(a => a.PatientId == patientId)
+            .ToListAsync();
+    }
 
     public async Task<int> UpdateStatusAsync(long appointmentId, string status, string? justification)
     {
