@@ -15,7 +15,9 @@ public class AppointmentSlotController(AppointmentSlotService appointmentSlotSer
     [Authorize(Roles = Roles.Doctor)]
     public async Task<IActionResult> Create([FromBody] CreateAppointmentSlotRequest createAppointmentSlotRequest)
     {
-        await appointmentSlotService.CreateAsync(createAppointmentSlotRequest);
+        var doctorId = long.Parse(User.Claims.FirstOrDefault(c => c.Type == "DoctorId")!.Value);
+        
+        await appointmentSlotService.CreateAsync(doctorId, createAppointmentSlotRequest);
         return Created();
     }
     
@@ -26,7 +28,7 @@ public class AppointmentSlotController(AppointmentSlotService appointmentSlotSer
         return Ok(await appointmentSlotService.GetAll());
     }
     
-    [HttpDelete("{id}")]
+    [HttpDelete("{id:long}")]
     [Authorize(Roles = Roles.Doctor)]
     public async Task<IActionResult> Delete([FromRoute]long id)
     {
@@ -34,7 +36,7 @@ public class AppointmentSlotController(AppointmentSlotService appointmentSlotSer
         return Ok();
     }
 
-    [HttpGet("availableappointment")]
+    [HttpGet("available-appointment")]
     public async Task<IActionResult> GetAvailableAppointment(int doctorId, DateTime appointmentDate)
     {
         return Ok( await appointmentSlotService.GetAvailableAppointment(doctorId, appointmentDate));

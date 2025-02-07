@@ -8,11 +8,11 @@ namespace Fiap.Hackathon.AppointmentScheduler.Application.Services;
 public class AppointmentSlotService(IAppointmentSlotRepository appointmentSlotRepository)
 {
     
-    public Task CreateAsync(CreateAppointmentSlotRequest request)
+    public Task CreateAsync(long doctorId, CreateAppointmentSlotRequest request)
     {
         var appointmentSlot = new AppointmentSlot()
         {
-            DoctorId = request.DoctorId,
+            DoctorId = doctorId,
             AvailableDate = request.AvailableDate,
             AvailableTime = request.AvailableTime.TimeOfDay
         };
@@ -23,7 +23,8 @@ public class AppointmentSlotService(IAppointmentSlotRepository appointmentSlotRe
     public async Task<IEnumerable<GetAllAppointmentSlotsResponse>> GetAll()
     {
         var appointmentSlots = await appointmentSlotRepository.GetAllAsync();
-        return appointmentSlots.Select(a => new GetAllAppointmentSlotsResponse(a.Id, a.Doctor, a.AvailableDate, a.AvailableTime));
+        return appointmentSlots.Select(appointmentSlot => 
+            new GetAllAppointmentSlotsResponse(appointmentSlot.Id, appointmentSlot.Doctor, appointmentSlot.AvailableDate, appointmentSlot.AvailableTime));
     }
     
     public async Task DeleteAsync(long id)
