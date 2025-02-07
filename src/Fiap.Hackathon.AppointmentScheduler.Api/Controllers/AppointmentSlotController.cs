@@ -8,7 +8,7 @@ namespace Fiap.Hackathon.AppointmentScheduler.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-[Authorize]
+
 public class AppointmentSlotController(AppointmentSlotService appointmentSlotService): ControllerBase
 {
     [HttpPost()]
@@ -33,6 +33,10 @@ public class AppointmentSlotController(AppointmentSlotService appointmentSlotSer
         await appointmentSlotService.DeleteAsync(id);
         return NoContent();
     }
-    
-    
+
+    [HttpGet("availableappointment")]
+    public async Task<IActionResult> GetAvailableAppointment(int doctorId, DateTime appointmentDate)
+    {
+        return Ok( await appointmentSlotService.GetAvailableAppointment(doctorId, appointmentDate));
+    }
 }

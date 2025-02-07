@@ -30,4 +30,9 @@ public class AppointmentSlotService(IAppointmentSlotRepository appointmentSlotRe
     {
         await appointmentSlotRepository.DeleteAsync(id);
     }
+
+    public async Task<IEnumerable<AppointmentSlot>> GetAvailableAppointment(int doctorId, DateTime appointmentDate)
+    {
+        return await appointmentSlotRepository.GetAvailableAppointment(doctorId, appointmentDate);
+    }
 }
