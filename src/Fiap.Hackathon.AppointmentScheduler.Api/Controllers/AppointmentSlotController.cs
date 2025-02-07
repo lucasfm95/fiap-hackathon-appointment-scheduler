@@ -33,6 +33,10 @@ public class AppointmentSlotController(AppointmentSlotService appointmentSlotSer
         await appointmentSlotService.DeleteAsync(id);
         return Ok();
     }
-    
-    
+
+    [HttpGet("availableappointment")]
+    public async Task<IActionResult> GetAvailableAppointment(int doctorId, DateTime appointmentDate)
+    {
+        return Ok( await appointmentSlotService.GetAvailableAppointment(doctorId, appointmentDate));
+    }
 }

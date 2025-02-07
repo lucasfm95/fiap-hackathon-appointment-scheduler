@@ -16,7 +16,8 @@ public class DoctorService(IDoctorRepository doctorRepository)
             Crm = createDoctorRequest.Crm,
             Profile = Profile.Doctor,
             Password = PasswordHasherHelper.Hash(createDoctorRequest.Password),
-            Specialty = createDoctorRequest.Specialty
+            Specialty = createDoctorRequest.Specialty,
+            AppointmentValue = createDoctorRequest.AppointmentValue
         };
         
         return doctorRepository.CreateAsync(doctor);
@@ -33,4 +34,8 @@ public class DoctorService(IDoctorRepository doctorRepository)
         var doctors = await doctorRepository.GetFiltered(specialty, name, crm);
         return doctors.Select(d => new GetAllDoctorsResponse(d.Id, d.Name, d.Crm, d.Specialty, d.AppointmentValue));
     }
+
+
+
+
 }
