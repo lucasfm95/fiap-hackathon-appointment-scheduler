@@ -35,4 +35,12 @@ public class AppointmentRepository(AppointmentSchedulerDbContext dbContext) : IA
                     .SetProperty(p => p.Status, status)
                     .SetProperty(p => p.Justification, justification));
     }
+    
+    public async Task<IEnumerable<Appointment>> GetByAppointmentSlot(long appointmentSlotId)
+    {
+        var slotAppointments =
+            await dbContext.Appointments.Where(appointment => appointment.AppointmentSlotId == appointmentSlotId && appointment.Status!.ToUpper() != "CANCELADO").ToListAsync();
+
+        return slotAppointments;
+    }
 }

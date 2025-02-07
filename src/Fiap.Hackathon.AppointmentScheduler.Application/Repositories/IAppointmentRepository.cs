@@ -10,4 +10,6 @@ public interface IAppointmentRepository
     Task<List<Appointment>> GetAllScheduledAppointmentsByPatient(long patientId);
     
     Task<int> UpdateStatusAsync(long appointmentId, string status, string? justification);
+    
+    Task<IEnumerable<Appointment>> GetByAppointmentSlot(long appointmentSlotId);
 }

@@ -38,23 +38,25 @@ public class AppointmentSlotRepository(AppointmentSchedulerDbContext dbContext) 
         
         predicate = predicate.And(a => a.AvailableDate.Date == availableDate.Date);
 
-        var slotAppointments = await dbContext.AppointmentSlots.Where(predicate).ToListAsync();
+        var slotAppointments =
+            await dbContext.AppointmentSlots.Where(predicate).ToListAsync();
 
-        var querytAppointments = dbContext.Appointments.Where(a => a.DoctorId == doctorId && (a.Status != "AGENDADO" || a.Status != "CONFIRMADO"));    
+        var querytAppointments = dbContext.Appointments.Where(a =>
+            a.DoctorId == doctorId && a.Status != "CANCELADO" &&
+            slotAppointments.Select(sp => sp.Id).Contains(a.AppointmentSlotId));
+        
         var appointments = await querytAppointments.ToListAsync();
 
-
-        var y = new List<AppointmentSlot>();
-
-
+        var appointmentSlots = new List<AppointmentSlot>();
+        
         foreach(var slot in slotAppointments)
         {
-            if(!appointments.Any(a => a.AppointmentSlotId == slot.Id && (a.Status == "AGENDADO" || a.Status == "CONFIRMADO")))
+            if(appointments.All(a => a.AppointmentSlotId != slot.Id))
             {
-                y.Add(slot);
+                appointmentSlots.Add(slot);
             }
         }
 
-        return y;
+        return appointmentSlots;
     }
 }

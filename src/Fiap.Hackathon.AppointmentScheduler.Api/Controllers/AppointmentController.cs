@@ -1,6 +1,7 @@
 using Fiap.Hackathon.AppointmentScheduler.Application.Constants;
 using Fiap.Hackathon.AppointmentScheduler.Application.Services;
 using Fiap.Hackathon.AppointmentScheduler.Domain.Entities;
+using Fiap.Hackathon.AppointmentScheduler.Domain.Exceptions;
 using Fiap.Hackathon.AppointmentScheduler.Domain.Requests;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -33,7 +34,14 @@ public class AppointmentController(AppointmentService appointmentService) : Cont
     [Authorize(Roles = Roles.Patient)]
     public async Task<IActionResult> CreateAppointment(CreateAppointmentRequest request)
     {
-        await appointmentService.CreateAsync(request);
+        try
+        {
+            await appointmentService.CreateAsync(request);
+        }
+        catch (DuplicateAppointmentException ex)
+        {
+            return BadRequest(ex.Message);
+        }
         
         return Created();
     }
