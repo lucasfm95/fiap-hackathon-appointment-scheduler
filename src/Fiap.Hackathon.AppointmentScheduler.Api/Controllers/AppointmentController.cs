@@ -16,6 +16,7 @@ public class AppointmentController(AppointmentService appointmentService) : Cont
     public async Task<IActionResult> CreateAppointment(CreateAppointmentRequest request)
     {
         await appointmentService.CreateAsync(request);
+        
         return Created();
     }
     
@@ -24,16 +25,19 @@ public class AppointmentController(AppointmentService appointmentService) : Cont
     public async Task<ActionResult<Appointment>> GetAllScheduledAppointmentsByDoctor()
     {
         var doctorId = User.Claims.FirstOrDefault(c => c.Type == "DoctorId");
+        
         return Ok(await appointmentService.GetAllScheduledAppointmentsByDoctor(long.Parse(doctorId.Value)));
     }
     
-    [HttpPost("set-status")]
-    [Authorize(Roles = Roles.Doctor)]
+    [HttpPatch("set-status")]
+    [Authorize(Roles = $"{Roles.Doctor}, {Roles.Patient}")]
     public async Task<IActionResult> SetStatusAppointment(UpdateAppointmentRequest request)
     {
+        if (request.Status.Equals("cancelado", StringComparison.InvariantCultureIgnoreCase) && string.IsNullOrWhiteSpace(request.Justification))
+            return BadRequest("Justification is required to cancel the appointment");
+        
         await appointmentService.UpdateStatusAsync(request.AppointmentId, request.Status,request.Justification);
+        
         return Ok();
     }
-    
-    
 }
